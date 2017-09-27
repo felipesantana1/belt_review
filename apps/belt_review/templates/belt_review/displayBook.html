@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+        <b><p>{{book.title}}</p></b>
+        <p>{{book.author.name}}</p>
+
+        <b><p>Latest Review:</p></b>
+            <p>Rating: {{reviews.stars}}</p>
+            <p>{{reviews.user.name}} says: {{reviews.review}}</p>
+
+        <form action='/home' method='POST'>
+            {% csrf_token %}
+            <input type='submit' value='Go Home!'>
+        </form>
+        <form action='/review/{{book.id}}' method='POST'>
+            {% csrf_token %}
+            Add New Review: <textarea name='review'></textarea>
+            Rating: <select name='stars'>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                    <option value='5'>5</option>
+                </select>
+            <input type='submit' value='Add Review!'>
+        </form>
+        {% if messages %}
+        {% for message in messages %}
+        <b><p>{{message}}</p></b>
+        {% endfor %}
+        {% endif %}
+    
+</body>
+</html>

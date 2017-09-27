@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Register/Log In</title>
+    </head>
+    <body>
+
+        <h1>Welcome!</h1>
+        <div>
+            <h3>Register</h3>
+            <form action='/create' method='POST'>
+                {% csrf_token %}
+                Name: <input type='text' name='name'>
+                Alias: <input type='text' name='alias'>
+                Email: <input type='text' name='email'>
+                Password: <input type='password' name='password'>
+                Confim Password: <input type='password' name='confirmPW'>
+                <input type='submit' value='Register'>
+            </form>
+            {% if messages %}
+                {% for message in messages %}
+                <b><p>{{message}}</p></b>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            <h3>Log In</h3>
+            <form action='/login' method='POST'>
+                {% csrf_token %}
+                Email: <input type='text' name='email'>
+                Password: <input type='password' name='password'>
+                <input type='submit' value='Log In'>
+            </form>
+        </div>
+        
+    </body>
+</html>

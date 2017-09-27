@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+            #link { 
+                background: none;
+                border: none;
+                color: #0066ff;
+                text-decoration: underline;
+                cursor: pointer; 
+                }
+                #br{
+
+                    border-bottom: 1px solid black;
+                    width: 50%;
+
+                }
+                #rev{
+
+                    vertical-align: right;
+                    text-align: left;
+                    width: 40%;
+
+                }
+                div{
+
+                    display: inline-block;
+
+                }
+    </style>
+</head>
+<body>
+    <h3><b>Welcome {{user}}!</b></h3>
+    <form action='/logout' method='POST'>
+        {% csrf_token %}
+        <input type='submit' value='Log Out!'>
+    </form>
+    <form action='/books/add' method='POST'>
+        {% csrf_token %}
+        <input type='submit' value='Add Book and Review!'>
+    </form>
+
+    
+        <b><p>Recently Reviewed Books: </p></b>
+        <hr>
+        {% for book in books %}
+            {% for review in reviews %}
+            {% if review.book.id == book.id %}
+    <div id='br'>    
+        <a href='/books/{{book.id}}'>{{book.title}}</a>
+        <p>Rating: {{review.stars}}</p>
+        <a href='users/{{review.user.id}}'>{{review.user.name}}</a> <p>says: {{review.review}}</p>
+    </div>   
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+    <div id='rev'>
+        <h3>Books with Reviews</h3>
+        {% for book in books %}
+        <a href='/books/{{book.id}}'>{{book.title}}</a>
+        {% endfor %}
+    </div>
+    
+    
+
+</body>
+</html>

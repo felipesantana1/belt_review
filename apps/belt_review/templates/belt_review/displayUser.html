@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+        <form action='/home' method='POST'>
+            {% csrf_token %}
+            <input type='submit' value='Go Home!'>
+        </form>
+        <form action='/books/add' method='POST'>
+            {% csrf_token %}
+            <input type='submit' value='Add Book and Review!'>
+        </form>
+
+        <h1>User: {{user.alias}}</h1>
+        <h3>Name: {{user.name}}</h3>
+        <h3>Email: {{user.email}}</h3>
+        <h3>Reviews: {{reviews}}</h3>
+    
+</body>
+</html>
